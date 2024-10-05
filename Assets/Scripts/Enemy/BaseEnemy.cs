@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
 {
     [Header("Enemy Data")] [SerializeField]
@@ -35,6 +36,7 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     public void SetSO(BaseEnemySO so)
     {
         enemySo = so;
+        _view.sprite = so.asset;
         _currentLifePoints = so.maxLife;
     }
 

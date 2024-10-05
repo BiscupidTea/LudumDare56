@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private WaveController waveController;
     [SerializeField] private int enemyCount;
     [SerializeField] private float timeBetweenEnemies = 0.5f;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private BaseEnemy enemyPrefab;
 
     [SerializeField] private Transform SpawnPosition;
     
@@ -57,11 +57,7 @@ public class EnemyManager : MonoBehaviour
 
     private BaseEnemy NewEnemy(BaseEnemySO so)
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
-        SpriteRenderer spriteRender = newEnemy.AddComponent<SpriteRenderer>();
-        spriteRender.sprite = so.asset;
-
-        BaseEnemy baseEnemyComponent = newEnemy.GetComponent<BaseEnemy>();
+        BaseEnemy baseEnemyComponent = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
         baseEnemyComponent.SetSO(so);
         baseEnemyComponent.SetNewPath(path);
         return baseEnemyComponent;
