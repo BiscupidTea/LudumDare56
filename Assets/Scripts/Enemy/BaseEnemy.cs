@@ -6,19 +6,30 @@ using UnityEngine.Events;
 public class BaseEnemy : MonoBehaviour, IHealth
 {
     [Header("Enemy Data")] [SerializeField]
-    private BaseEnemySO enemySo;
+    public BaseEnemySO enemySo;
 
-    public UnityAction OnDeath;
-
-    private List<Vector2> pathPoints;
+    private List<Transform> pathPoints;
     private int currentPoint = 0;
+
+    private float distanceToReachPoint = 0.4f;
 
     private void Update()
     {
-        transform.position = Vector2.Lerp(pathPoints[currentPoint], pathPoints[currentPoint + 1], enemySo.speed);
+
+        transform.position = Vector2.MoveTowards(transform.position, pathPoints[currentPoint + 1].position, enemySo.speed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, pathPoints[currentPoint + 1].position) <= distanceToReachPoint)
+        {
+            currentPoint++;
+
+            if (currentPoint >= pathPoints.Count - 1)
+            {
+                enabled = false;
+            }
+        }
     }
 
-    public void SetNewPath(List<Vector2> newPath)
+    public void SetNewPath(List<Transform> newPath)
     {
         pathPoints = newPath;
     }
@@ -41,5 +52,11 @@ public class BaseEnemy : MonoBehaviour, IHealth
     public void Unsuscribe(Action action)
     {
         throw new NotImplementedException();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, distanceToReachPoint);
     }
 }
