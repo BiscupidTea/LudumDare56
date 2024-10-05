@@ -23,9 +23,10 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         _panel.SetActive(false);
+        HandlePause(false); 
     }
 
     private void HandlePause(bool pause)
