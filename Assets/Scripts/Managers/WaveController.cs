@@ -7,6 +7,7 @@ public class WaveController : MonoBehaviour
 {
     [SerializeField] private float _timeBetweenWave = 10;
     [SerializeField] private List<WaveDataSO> _waveDatas;
+    [SerializeField] private EnemyManager _enemyManager;
 
     private int _currentIndex;
 
@@ -20,7 +21,7 @@ public class WaveController : MonoBehaviour
     private void Start()
     {
         _currentIndex = 0;
-        //StartNewWave();
+        StartNewWave();
     }
 
     [ContextMenu("Start")]
@@ -57,5 +58,15 @@ public class WaveController : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         onWaveStart?.Invoke(_waveDatas[_currentIndex].enemyToSpawn);
+
+        _currentIndex++;
+    }
+
+    private void HandleLastEnemyDie()
+    {
+        if (_currentIndex >= _waveDatas.Count)
+            FinishedWaves?.Invoke();
+        else
+            StartNewWave();
     }
 }
