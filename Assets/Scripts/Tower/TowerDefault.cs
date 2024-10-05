@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class TowerDefault : BaseTower
     
     private bool canShoot = true;
 
+    public Action OnShoot;
+
     protected override void Shoot()
     {
         if (!canShoot) return;
@@ -20,7 +23,7 @@ public class TowerDefault : BaseTower
     private IEnumerator ShootSequence()
     {
         canShoot = false;
-
+        OnShoot?.Invoke();
         GetBulletFromPool();
         
         audio.PlayShootSound();
