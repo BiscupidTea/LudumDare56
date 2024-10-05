@@ -7,10 +7,12 @@ public class EconomyManager : MonoBehaviour
     [Header("Start parameters")]
     [SerializeField] private float _initialGold = 100;
     [SerializeField] private float _goldPerSecond = 1;
+    [SerializeField] private int _multipleOfTheNumberToSend = 5;
 
     private float _currentGold;
 
-    public Action<int> refreshGoldEvent;
+    public Action<int> RefreshGoldEvent;
+    public Action<int> CheckTowersGold;
 
     private void OnEnable()
     {
@@ -22,9 +24,17 @@ public class EconomyManager : MonoBehaviour
         HandleRefreshGold();
     }
 
+    private void Update()
+    {
+        if ((int) _currentGold % _multipleOfTheNumberToSend == 0)
+        {
+            CheckTowersGold?.Invoke((int)_currentGold);
+        }
+    }
+
     private void HandleRefreshGold()
     {
-        refreshGoldEvent?.Invoke((int)_currentGold);
+        RefreshGoldEvent?.Invoke((int)_currentGold);
         StartCoroutine(RechargeGold());
     }
 
@@ -38,12 +48,16 @@ public class EconomyManager : MonoBehaviour
     public void AddGold(int gold)
     {
         _currentGold += gold;
-        refreshGoldEvent?.Invoke((int)_currentGold);
+        RefreshGoldEvent?.Invoke((int)_currentGold);
     }
 
-    public void RemoveGold(int gold) 
+    public bool RemoveGold(int gold) 
     {
+        if(_currentGold - gold < 0)
+            return false;
+
         _currentGold -= gold;
-        refreshGoldEvent?.Invoke((int)_currentGold);
+        RefreshGoldEvent?.Invoke((int)_currentGold);
+        return true;
     }
 }

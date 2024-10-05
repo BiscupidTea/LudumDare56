@@ -80,6 +80,11 @@ public class BaseTower : MonoBehaviour
 
     protected virtual void Shoot() { }
 
+    public float GetPrice()
+    {
+        return towerSo.price;
+    }
+
     private void OnDrawGizmos()
     {
         Handles.color = Color.cyan;

@@ -8,12 +8,12 @@ public class EconomyUI : MonoBehaviour
 
     private void OnEnable()
     {
-        _manager.refreshGoldEvent += HandleRefreshGold;
+        _manager.RefreshGoldEvent += HandleRefreshGold;
     }
 
     private void OnDisable()
     {
-        _manager.refreshGoldEvent -= HandleRefreshGold;
+        _manager.RefreshGoldEvent -= HandleRefreshGold;
     }
 
     private void HandleRefreshGold(int gold)
