@@ -1,11 +1,14 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WaveUI : MonoBehaviour
 {
     [SerializeField] private WaveController _controller;
+    [SerializeField] private Image _timer;
     [SerializeField] private Image loadingBarFill;
+    [SerializeField] private TMP_Text _waveText;
     [SerializeField] private float fillDuration = .25f;
 
     private void OnEnable()
@@ -15,6 +18,7 @@ public class WaveUI : MonoBehaviour
             _controller.onCharging += EnableLoadingTime;
             _controller.onCharged += DisableLoadingTime;
             _controller.onLoadPercentage += UpdateLoadTimeFill;
+            _controller.WaveChange += HandleChangeWave;
         }
     }
 
@@ -23,11 +27,12 @@ public class WaveUI : MonoBehaviour
         _controller.onCharging -= EnableLoadingTime;
         _controller.onCharged -= DisableLoadingTime;
         _controller.onLoadPercentage -= UpdateLoadTimeFill;
+        _controller.WaveChange -= HandleChangeWave;
     }
 
     private void EnableLoadingTime()
     {
-        loadingBarFill.enabled = true;
+        _timer.gameObject.SetActive(true);
         loadingBarFill.fillAmount = 0f;
     }
 
@@ -39,7 +44,7 @@ public class WaveUI : MonoBehaviour
     private void TurnOffLoadingTime()
     {
         loadingBarFill.fillAmount = 0f;
-        loadingBarFill.enabled = false;
+        _timer.gameObject.SetActive(false);
     }
 
     private void UpdateLoadTimeFill(float percentage)
@@ -66,5 +71,10 @@ public class WaveUI : MonoBehaviour
         }
 
         loadingBarFill.fillAmount = to;
+    }
+
+    private void HandleChangeWave(int actualWave, int maxWave)
+    {
+        _waveText.text = $"{actualWave} / {maxWave}";
     }
 }

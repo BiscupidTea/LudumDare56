@@ -17,6 +17,7 @@ public class WaveController : MonoBehaviour
 
     public event Action<List<BaseEnemySO>> onWaveStart;
     public event Action FinishedWaves;
+    public event Action<int, int> WaveChange;
 
     private void OnEnable()
     {
@@ -30,7 +31,9 @@ public class WaveController : MonoBehaviour
 
     private void Start()
     {
+        
         _currentIndex = 0;
+        WaveChange?.Invoke(_currentIndex + 1, _waveDatas.Count);
         StartNewWave();
     }
 
@@ -44,6 +47,7 @@ public class WaveController : MonoBehaviour
         }
 
         var total = _timeBetweenWave;
+        WaveChange?.Invoke( _currentIndex + 1, _waveDatas.Count);
         onCharging?.Invoke();
         onLoadPercentage?.Invoke(0);
         StartCoroutine(WaitingNewWave(currentIndex => onLoadPercentage((float)currentIndex / 1)));
