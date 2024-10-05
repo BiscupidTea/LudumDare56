@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1362362359239359870}
   - component: {fileID: 4517970241741925537}
   - component: {fileID: 3556340417851006005}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3003914517828024080}
   - component: {fileID: 2270580335267343002}
   - component: {fileID: 4927951481540135400}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,6 +245,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 875733433301623067}
     m_Modifications:
+    - target: {fileID: 919922678513667569, guid: c9e5d5d5225602045a5153995eef2aa6, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2792956755337637659, guid: c9e5d5d5225602045a5153995eef2aa6, type: 3}
       propertyPath: _objectHealth
       value: 
@@ -252,6 +256,10 @@ PrefabInstance:
     - target: {fileID: 5626912007392483802, guid: c9e5d5d5225602045a5153995eef2aa6, type: 3}
       propertyPath: m_Name
       value: LifeBarr
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626912007392483802, guid: c9e5d5d5225602045a5153995eef2aa6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7651673433132659713, guid: c9e5d5d5225602045a5153995eef2aa6, type: 3}
       propertyPath: m_Pivot.x

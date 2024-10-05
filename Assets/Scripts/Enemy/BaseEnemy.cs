@@ -69,6 +69,7 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
         currentPoint = 0;
         _currentLifePoints = enemySo.maxLife;
         OnEnemyChangeLife?.Invoke(_currentLifePoints / enemySo.maxLife);
+        _canMove |= true;
         gameObject.SetActive(true);
     }
 
