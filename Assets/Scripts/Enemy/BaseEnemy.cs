@@ -13,13 +13,23 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     private List<Transform> pathPoints;
     private int currentPoint = 0;
 
+    private bool _canMove = false;
+
     private float distanceToReachPoint = 0.4f;
 
     public event Action<float> OnEnemyChangeLife;
     public event Action<BaseEnemy> OnEnemyDeath;
 
+    private void Awake()
+    {
+        _view = GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
+        if (!_canMove)
+            return;
+        
         transform.position = Vector2.MoveTowards(transform.position, pathPoints[currentPoint + 1].position, enemySo.speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, pathPoints[currentPoint + 1].position) <= distanceToReachPoint)
@@ -38,6 +48,7 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
         enemySo = so;
         _view.sprite = so.asset;
         _currentLifePoints = so.maxLife;
+        _canMove = true;
     }
 
     public string GetName()

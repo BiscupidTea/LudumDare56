@@ -14,8 +14,8 @@ public class EnemyManager : MonoBehaviour
     
     [SerializeField] private List<Transform> path;
 
-    private List<BaseEnemy> _activeEnemies;
-    private Dictionary<string, List<BaseEnemy>> _poolEnemies;
+    private List<BaseEnemy> _activeEnemies = new();
+    private Dictionary<string, List<BaseEnemy>> _poolEnemies = new();
 
     public event Action AllEnemiesDeath;
 
