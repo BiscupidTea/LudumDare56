@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
@@ -25,6 +23,8 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
 
     public event Action<float> OnEnemyChangeLife;
     public event Action<BaseEnemy> OnEnemyDeath;
+
+    public int ID { get; set; }
 
     private void Awake()
     {
