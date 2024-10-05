@@ -48,7 +48,7 @@ public class TowerDefault : BaseTower
             bulletsPool.Remove(bullet);
         }
 
-        bullet.SetTarget(target, towerSo.damage, 5f);
+        bullet.SetTarget(target.transform, towerSo.damage, 5f);
         return bullet;
     }
 

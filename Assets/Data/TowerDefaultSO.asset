@@ -15,5 +15,5 @@ MonoBehaviour:
   damage: 1
   fireRate: 1
   attackRadius: 5
-  rotationSpeed: 100
-  price: 10
+  rotationSpeed: 200
+  price: 5

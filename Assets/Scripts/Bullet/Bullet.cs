@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     private Transform target;
     private Rigidbody2D rb;
+
+    private Vector2 direction;
     private float speed;
     private int damage;
 
@@ -17,10 +20,12 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 direction = (target.position - transform.position).normalized;
         rb.velocity = direction * speed;
 
-        RotateTowardsTarget();
+        if (target != null && target.gameObject.activeSelf)
+        {
+            RotateTowardsTarget();
+        }
     }
 
     public void SetTarget(Transform _target, int _damage, float _speed)
@@ -30,6 +35,8 @@ public class Bullet : MonoBehaviour
         target = _target;
         damage = _damage;
         speed = _speed;
+
+        direction = (target.position - transform.position).normalized;
     }
 
     public void RotateTowardsTarget()
@@ -42,11 +49,16 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D targetCollision)
     {
-        if (targetCollision.transform.TryGetComponent<IHealth>(out var hitTarget))
+        if (targetCollision.transform == target)
         {
-            hitTarget.TakeDamage(damage);
-            Deactivate();
+            if (targetCollision.transform.TryGetComponent<IHealth>(out var hitTarget))
+            {
+                hitTarget.TakeDamage(damage);
+                Deactivate();
+            }
         }
+
+        //TODO: Bullet has to disappear when colliding with walls
     }
 
     private void Deactivate()

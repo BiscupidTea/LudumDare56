@@ -133,3 +133,6 @@ MonoBehaviour:
   rotationPoint: {fileID: 2789932025889149739}
   aimPoint: {fileID: 7474777995179870977}
   bulletPrefab: {fileID: 1463925312192126859, guid: 5c6b3271f229acb4d83e9edc4c8ba887, type: 3}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64

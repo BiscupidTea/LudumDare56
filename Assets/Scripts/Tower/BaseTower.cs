@@ -12,7 +12,9 @@ public class BaseTower : MonoBehaviour
 
     [SerializeField] protected Bullet bulletPrefab;
 
-    protected Transform target;
+    [SerializeField] private LayerMask enemyMask;
+
+    protected BaseEnemy target;
 
     private void Awake()
     {
@@ -47,27 +49,37 @@ public class BaseTower : MonoBehaviour
         }
 
         RotateTowardsTarget();
-        if (!CheckIfTargetInRange()) target = null;
-        else Shoot();
+
+        if (!CheckIfTargetInRange())
+        {
+            HandleTargetDeath(target);
+            return;
+        }
+
+        Shoot();
     }
 
     private void FindTarget()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, towerSo.attackRadius, transform.right, 0f);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, towerSo.attackRadius, transform.right, 0f, enemyMask);
 
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.transform.TryGetComponent<IHealth>(out var targetHealth))
+            if (hit.transform.TryGetComponent<BaseEnemy>(out var enemyTarget))
             {
-                target = hit.transform;
-                return;
+                if (!enemyTarget.gameObject.activeSelf) continue;
+
+                target = enemyTarget;
+                target.OnEnemyDeath += HandleTargetDeath;
+
+                break;
             }
         }
     }
 
     private void RotateTowardsTarget()
     {
-        float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg + 90f;
+        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg + 90f;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
         rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, towerSo.rotationSpeed * Time.deltaTime);
@@ -75,7 +87,7 @@ public class BaseTower : MonoBehaviour
 
     private bool CheckIfTargetInRange()
     {
-        return Vector2.Distance(target.position, transform.position) <= towerSo.attackRadius;
+        return Vector2.Distance(target.transform.position, transform.position) <= towerSo.attackRadius;
     }
 
     protected virtual void Shoot() { }
@@ -83,6 +95,12 @@ public class BaseTower : MonoBehaviour
     public float GetPrice()
     {
         return towerSo.price;
+    }
+
+    private void HandleTargetDeath(BaseEnemy enemy)
+    {
+        target.OnEnemyDeath -= HandleTargetDeath;
+        target = null;
     }
 
     private void OnDrawGizmos()
