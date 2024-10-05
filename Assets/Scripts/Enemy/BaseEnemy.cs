@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
 {
     [Header("Enemy Data")] [SerializeField]
     public BaseEnemySO enemySo;
+
+    [SerializeField] private Transform rotationPoint;
+    [SerializeField] private float rotationSpeed = 5;
 
     private SpriteRenderer _view;
     private float _currentLifePoints;
@@ -33,6 +37,7 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
             return;
         
         transform.position = Vector2.MoveTowards(transform.position, pathPoints[currentPoint + 1].position, enemySo.speed * Time.deltaTime);
+        RotateTowardsTarget();
 
         if (Vector2.Distance(transform.position, pathPoints[currentPoint + 1].position) <= distanceToReachPoint)
         {
@@ -141,5 +146,13 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
         _canMove = false;
         _temple.TakeDamage((int)enemySo.damage);
         Dead();
+    }
+
+    private void RotateTowardsTarget()
+    {
+        float angle = Mathf.Atan2(pathPoints[currentPoint + 1].position.y - transform.position.y, pathPoints[currentPoint + 1].position.x - transform.position.x) * Mathf.Rad2Deg + 90f;
+
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

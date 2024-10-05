@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySo: {fileID: 0}
+  rotationPoint: {fileID: 2220202094282416978}
+  rotationSpeed: 50
 --- !u!58 &4517970241741925537
 CircleCollider2D:
   m_ObjectHideFlags: 0
