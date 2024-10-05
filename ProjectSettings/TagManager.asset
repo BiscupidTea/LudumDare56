@@ -14,7 +14,7 @@ TagManager:
   - Enemy
   - Tower
   - Spawner
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bullet
+    uniqueID: 2018315991
+    locked: 0
+  - name: Tower
+    uniqueID: 2223998315
     locked: 0
