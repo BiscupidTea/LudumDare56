@@ -96,12 +96,6 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     public void Dead()
     {
         OnEnemyDeath?.Invoke(this);
-        StartCoroutine(WaitingForDie());
-    }
-
-    private IEnumerator WaitingForDie()
-    {
-        yield return null;
         gameObject.SetActive(false);
     }
 
