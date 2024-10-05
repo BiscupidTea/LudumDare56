@@ -41,8 +41,7 @@ public class TowerDefault : BaseTower
             bullet = bulletsPool[0];
 
             bullet.transform.position = aimPoint.position;
-            bullet.transform.rotation = Quaternion.identity;
-
+            bullet.RotateTowardsTarget();
             bullet.gameObject.SetActive(true);
 
             activeBullets.Add(bullet);
