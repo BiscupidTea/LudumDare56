@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class BaseEnemy : MonoBehaviour, IHealth
 {
@@ -15,7 +14,7 @@ public class BaseEnemy : MonoBehaviour, IHealth
 
     private void Update()
     {
-
+        /*
         transform.position = Vector2.MoveTowards(transform.position, pathPoints[currentPoint + 1].position, enemySo.speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, pathPoints[currentPoint + 1].position) <= distanceToReachPoint)
@@ -27,6 +26,7 @@ public class BaseEnemy : MonoBehaviour, IHealth
                 enabled = false;
             }
         }
+        */
     }
 
     public void SetNewPath(List<Transform> newPath)
