@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
 {
     [Header("Enemy Data")] [SerializeField]
@@ -11,14 +13,25 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     private float _currentLifePoints;
     private List<Transform> pathPoints;
     private int currentPoint = 0;
+    private OlimpicTemple _temple;
+
+    private bool _canMove = false;
 
     private float distanceToReachPoint = 0.4f;
 
     public event Action<float> OnEnemyChangeLife;
     public event Action<BaseEnemy> OnEnemyDeath;
 
+    private void Awake()
+    {
+        _view = GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
+        if (!_canMove)
+            return;
+        
         transform.position = Vector2.MoveTowards(transform.position, pathPoints[currentPoint + 1].position, enemySo.speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, pathPoints[currentPoint + 1].position) <= distanceToReachPoint)
@@ -27,7 +40,7 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
 
             if (currentPoint >= pathPoints.Count - 1)
             {
-                enabled = false;
+                AttackTemple();
             }
         }
     }
@@ -35,7 +48,14 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     public void SetSO(BaseEnemySO so)
     {
         enemySo = so;
+        _view.sprite = so.asset;
         _currentLifePoints = so.maxLife;
+        _canMove = true;
+    }
+
+    public void SetTemple(OlimpicTemple temple)
+    {
+        _temple = temple;
     }
 
     public string GetName()
@@ -70,6 +90,13 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     public void Dead()
     {
         OnEnemyDeath?.Invoke(this);
+        StartCoroutine(WaitingForDie());
+    }
+
+    private IEnumerator WaitingForDie()
+    {
+        yield return null;
+        gameObject.SetActive(false);
     }
 
     public void SuscribeActionDeath(Action action)
@@ -106,5 +133,12 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
     public void Unsuscribe(Action<BaseEnemy> action)
     {
         OnEnemyDeath -= action;
+    }
+
+    private void AttackTemple()
+    {
+        _canMove = false;
+        _temple.TakeDamage((int)enemySo.damage);
+        Dead();
     }
 }

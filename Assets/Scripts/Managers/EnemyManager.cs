@@ -8,14 +8,15 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private WaveController waveController;
     [SerializeField] private int enemyCount;
     [SerializeField] private float timeBetweenEnemies = 0.5f;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private BaseEnemy enemyPrefab;
+    [SerializeField] private OlimpicTemple _temple;
 
     [SerializeField] private Transform SpawnPosition;
     
     [SerializeField] private List<Transform> path;
 
-    private List<BaseEnemy> _activeEnemies;
-    private Dictionary<string, List<BaseEnemy>> _poolEnemies;
+    private List<BaseEnemy> _activeEnemies = new();
+    private Dictionary<string, List<BaseEnemy>> _poolEnemies = new();
 
     public event Action AllEnemiesDeath;
 
@@ -57,13 +58,10 @@ public class EnemyManager : MonoBehaviour
 
     private BaseEnemy NewEnemy(BaseEnemySO so)
     {
-        GameObject newEnemy = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
-        SpriteRenderer spriteRender = newEnemy.AddComponent<SpriteRenderer>();
-        spriteRender.sprite = so.asset;
-
-        BaseEnemy baseEnemyComponent = newEnemy.GetComponent<BaseEnemy>();
+        BaseEnemy baseEnemyComponent = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
         baseEnemyComponent.SetSO(so);
         baseEnemyComponent.SetNewPath(path);
+        baseEnemyComponent.SetTemple(_temple);
         return baseEnemyComponent;
     }
 
@@ -100,6 +98,11 @@ public class EnemyManager : MonoBehaviour
             _poolEnemies[enemy.GetName()].Add(enemy);
             _activeEnemies.Remove(enemy);
             enemy.Unsuscribe(HandleEnemyDeath);
+        }
+
+        if(_activeEnemies.Count == 0)
+        {
+            AllEnemiesDeath?.Invoke();
         }
     }
 }
