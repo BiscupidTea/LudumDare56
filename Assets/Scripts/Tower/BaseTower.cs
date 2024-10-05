@@ -63,17 +63,23 @@ public class BaseTower : MonoBehaviour
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, towerSo.attackRadius, transform.right, 0f, enemyMask);
 
+        BaseEnemy potentialTarget = null;
+
         foreach (RaycastHit2D hit in hits)
         {
             if (hit.transform.TryGetComponent<BaseEnemy>(out var enemyTarget))
             {
                 if (!enemyTarget.gameObject.activeSelf) continue;
 
-                target = enemyTarget;
-                target.OnEnemyDeath += HandleTargetDeath;
-
-                break;
+                if (potentialTarget == null || enemyTarget.ID < potentialTarget.ID)
+                    potentialTarget = enemyTarget;
             }
+        }
+
+        if (potentialTarget != null)
+        {
+            target = potentialTarget;
+            target.OnEnemyDeath += HandleTargetDeath;
         }
     }
 

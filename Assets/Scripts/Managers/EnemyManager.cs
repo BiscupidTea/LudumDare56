@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
 
     private List<BaseEnemy> _activeEnemies = new();
     private Dictionary<string, List<BaseEnemy>> _poolEnemies = new();
+    private int enemyIds = 0;
 
     public event Action AllEnemiesDeath;
 
@@ -50,6 +51,8 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++)
         {
             BaseEnemy baseEnemyComponent = PoolCheck(enemies[i]);
+            baseEnemyComponent.ID = enemyIds++;
+
             _activeEnemies.Add(baseEnemyComponent);
             baseEnemyComponent.SuscribeAction(HandleEnemyDeath);
             yield return new WaitForSeconds(timeBetweenEnemies);
