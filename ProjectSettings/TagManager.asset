@@ -44,6 +44,9 @@ TagManager:
   - name: Bullet
     uniqueID: 2018315991
     locked: 0
+  - name: AttackArea
+    uniqueID: 663145081
+    locked: 0
   - name: Tower
     uniqueID: 2223998315
     locked: 0
