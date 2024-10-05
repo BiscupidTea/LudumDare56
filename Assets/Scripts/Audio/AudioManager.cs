@@ -24,12 +24,9 @@ public class AudioManager : MonoBehaviour
 
    public void PlayMusic(AudioClip musicClip)
    {
-      if (musicSource.clip != musicClip)
-      {
          musicSource.Stop();
          musicSource.clip = musicClip;
          musicSource.Play();
-      }
    }
 
    public void PlaySFX(AudioClip sfxClip)
