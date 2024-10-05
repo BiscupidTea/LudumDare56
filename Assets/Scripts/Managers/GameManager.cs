@@ -34,11 +34,13 @@ public class GameManager : MonoBehaviour
     private void HandleWavesAreOver()
     {
         GameEnd?.Invoke(true);
+        Debug.Log("Ganaste");
     }
 
     private void HandleOlimpicTempleDeath()
     {
         GameEnd?.Invoke(false);
+        Debug.Log("Perdiste");
     }
 
     private void Validate()

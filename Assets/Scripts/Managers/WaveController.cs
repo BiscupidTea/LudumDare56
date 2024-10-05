@@ -18,6 +18,16 @@ public class WaveController : MonoBehaviour
     public event Action<List<BaseEnemySO>> onWaveStart;
     public event Action FinishedWaves;
 
+    private void OnEnable()
+    {
+        _enemyManager.AllEnemiesDeath += HandleLastEnemyDie;
+    }
+
+    private void OnDisable()
+    {
+        _enemyManager.AllEnemiesDeath -= HandleLastEnemyDie;
+    }
+
     private void Start()
     {
         _currentIndex = 0;

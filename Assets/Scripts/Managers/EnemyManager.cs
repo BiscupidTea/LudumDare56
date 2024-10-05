@@ -94,10 +94,16 @@ public class EnemyManager : MonoBehaviour
         }
 
         if(_poolEnemies.ContainsKey(enemy.GetName()))
-            {
+        {
             _poolEnemies[enemy.GetName()].Add(enemy);
             _activeEnemies.Remove(enemy);
             enemy.Unsuscribe(HandleEnemyDeath);
+        }
+        else
+        {
+            List<BaseEnemy> tempList = new();
+            tempList.Add(enemy);
+            _poolEnemies.Add(enemy.GetName(),tempList);
         }
 
         if(_activeEnemies.Count == 0)
