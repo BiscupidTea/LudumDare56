@@ -31,5 +31,13 @@ public class PauseManager : MonoBehaviour
     private void HandlePause(bool pause)
     {
         _panel.SetActive(pause);
+        if (pause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 }
