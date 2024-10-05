@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee9a3593e45e1443b91c9e931e73287, type: 3}
   m_Name: WaveDataSo
   m_EditorClassIdentifier: 
-  enemyToSpawn: []
+  enemyToSpawn:
+  - {fileID: 11400000, guid: 4cdc49e16457443409f0fb9d04ca0e10, type: 2}
+  - {fileID: 11400000, guid: 4cdc49e16457443409f0fb9d04ca0e10, type: 2}
+  - {fileID: 11400000, guid: 4cdc49e16457443409f0fb9d04ca0e10, type: 2}
