@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Transform SpawnPosition;
     
     [SerializeField] private List<Transform> path;
+
+    public event Action AllEnemiesDeath;
 
     private void OnEnable()
     {

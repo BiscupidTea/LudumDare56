@@ -15,7 +15,7 @@ public class WaveController : MonoBehaviour
     public event Action onCharged = delegate { };
 
     public event Action<List<BaseEnemySO>> onWaveStart;
-    public event Action waveEnds;
+    public event Action FinishedWaves;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class WaveController : MonoBehaviour
     {
         if (_currentIndex >= _waveDatas.Count)
         {
-            waveEnds?.Invoke();
+            FinishedWaves?.Invoke();
             return;
         }
 
