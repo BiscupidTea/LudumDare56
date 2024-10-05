@@ -3411,6 +3411,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 636371212024653135, guid: 04391a58fbdcc0e4d9492df0581388c8, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 636371212024653135, guid: 04391a58fbdcc0e4d9492df0581388c8, type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 636371212024653135, guid: 04391a58fbdcc0e4d9492df0581388c8, type: 3}
+      propertyPath: BypassReverbZones
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1151534329232549708, guid: 04391a58fbdcc0e4d9492df0581388c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
