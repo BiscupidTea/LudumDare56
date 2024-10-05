@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TurretAudio : MonoBehaviour
 {
-    [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private AudioClip[] shootSFX;
 
     private AudioManager audioManager;
 
@@ -16,6 +17,6 @@ public class TurretAudio : MonoBehaviour
 
     public void PlayShootSound()
     {
-        audioManager.PlaySFX(shootSFX);
+        audioManager.PlaySFX(shootSFX[Random.Range(0, shootSFX.Length)]);
     }
 }

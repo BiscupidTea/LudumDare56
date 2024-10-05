@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2789932025889149739}
   - component: {fileID: 2629803975758240851}
   - component: {fileID: 4861142895689510523}
+  - component: {fileID: 3389398249108857387}
   m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
@@ -136,3 +137,18 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  audio: {fileID: 3389398249108857387}
+--- !u!114 &3389398249108857387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846342086443264967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b99a7d80165fa4a8ccc236a69f04f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSFX:
+  - {fileID: 8300000, guid: db5189dad9709604bb6a54a47908ee09, type: 3}
