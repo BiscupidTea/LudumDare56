@@ -6,9 +6,13 @@ public interface IHealth
 
     public void Dead();
 
-    public void SuscribeAction(Action action);
+    public void SuscribeLifeChange(Action<float> action);
 
-    public void Unsuscribe(Action action);
+    public void UnsuscribeLifeChange(Action<float> action);
+
+    public void SuscribeActionDeath(Action action);
+
+    public void UnsuscribeDeath(Action action);
 }
 
 public interface IHealth<T> : IHealth

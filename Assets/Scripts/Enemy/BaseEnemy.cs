@@ -14,7 +14,6 @@ public class BaseEnemy : MonoBehaviour, IHealth
 
     private void Update()
     {
-        /*
         transform.position = Vector2.MoveTowards(transform.position, pathPoints[currentPoint + 1].position, enemySo.speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, pathPoints[currentPoint + 1].position) <= distanceToReachPoint)
@@ -26,7 +25,6 @@ public class BaseEnemy : MonoBehaviour, IHealth
                 enabled = false;
             }
         }
-        */
     }
 
     public void SetNewPath(List<Transform> newPath)
@@ -44,12 +42,12 @@ public class BaseEnemy : MonoBehaviour, IHealth
         throw new NotImplementedException();
     }
 
-    public void SuscribeAction(Action action)
+    public void SuscribeActionDeath(Action action)
     {
         throw new NotImplementedException();
     }
 
-    public void Unsuscribe(Action action)
+    public void UnsuscribeDeath(Action action)
     {
         throw new NotImplementedException();
     }
@@ -58,5 +56,15 @@ public class BaseEnemy : MonoBehaviour, IHealth
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, distanceToReachPoint);
+    }
+
+    public void SuscribeLifeChange(Action<float> action)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UnsuscribeLifeChange(Action<float> action)
+    {
+        throw new NotImplementedException();
     }
 }
