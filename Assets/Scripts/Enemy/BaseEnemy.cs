@@ -73,9 +73,9 @@ public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
         transform.position = pathPoints[0].position;
         currentPoint = 0;
         _currentLifePoints = enemySo.maxLife;
-        OnEnemyChangeLife?.Invoke(_currentLifePoints / enemySo.maxLife);
-        _canMove |= true;
+        _canMove = true;
         gameObject.SetActive(true);
+        OnEnemyChangeLife?.Invoke(_currentLifePoints / enemySo.maxLife);
     }
 
     public void SetNewPath(List<Transform> newPath)
