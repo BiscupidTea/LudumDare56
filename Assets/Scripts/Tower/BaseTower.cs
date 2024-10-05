@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BaseTower : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BaseTower : MonoBehaviour
     [SerializeField] protected Bullet bulletPrefab;
 
     [SerializeField] private LayerMask enemyMask;
+
+    [SerializeField] private GameObject attackRangeUI;
 
     protected BaseEnemy target;
 
