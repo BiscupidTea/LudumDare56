@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c9b340a20f37e4eb8b41b7b03012be, type: 3}
   m_Name: BaseEnemy
   m_EditorClassIdentifier: 
-  asset: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  enemyName: 
+  asset: {fileID: 21300000, guid: e259a9b6bea0aca44a94ce869e33f836, type: 3}
   speed: 1.2
   maxLife: 5
   damage: 5

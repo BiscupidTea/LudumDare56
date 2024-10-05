@@ -14,6 +14,9 @@ public class EnemyManager : MonoBehaviour
     
     [SerializeField] private List<Transform> path;
 
+    private List<BaseEnemy> _activeEnemies;
+    private Dictionary<string, List<BaseEnemy>> _poolEnemies;
+
     public event Action AllEnemiesDeath;
 
     private void OnEnable()
@@ -45,14 +48,58 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
-            SpriteRenderer spriteRender = newEnemy.AddComponent<SpriteRenderer>();
-            spriteRender.sprite = enemies[i].asset;
-
-            BaseEnemy baseEnemyComponent = newEnemy.GetComponent<BaseEnemy>();
-            baseEnemyComponent.enemySo = enemies[i];
-            baseEnemyComponent.SetNewPath(path);
+            BaseEnemy baseEnemyComponent = PoolCheck(enemies[i]);
+            _activeEnemies.Add(baseEnemyComponent);
+            baseEnemyComponent.SuscribeAction(HandleEnemyDeath);
             yield return new WaitForSeconds(timeBetweenEnemies);
+        }
+    }
+
+    private BaseEnemy NewEnemy(BaseEnemySO so)
+    {
+        GameObject newEnemy = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
+        SpriteRenderer spriteRender = newEnemy.AddComponent<SpriteRenderer>();
+        spriteRender.sprite = so.asset;
+
+        BaseEnemy baseEnemyComponent = newEnemy.GetComponent<BaseEnemy>();
+        baseEnemyComponent.SetSO(so);
+        baseEnemyComponent.SetNewPath(path);
+        return baseEnemyComponent;
+    }
+
+    private BaseEnemy PoolCheck(BaseEnemySO so)
+    {
+        if (_poolEnemies.ContainsKey(so.enemyName))
+        {
+            if (_poolEnemies[so.enemyName].Count <= 0)
+                return NewEnemy(so);
+            else
+            {
+                BaseEnemy temp = _poolEnemies[so.enemyName][0];
+                _poolEnemies[so.enemyName].Remove(temp);
+                temp.Revive();
+                return temp;
+            }
+        }
+        else
+        {
+            return NewEnemy(so);
+        }
+    }
+
+    private void HandleEnemyDeath(BaseEnemy enemy)
+    {
+        BaseEnemy temp = enemy;
+        if (_activeEnemies.Contains(enemy))
+        {
+            _activeEnemies.Remove(enemy);
+        }
+
+        if(_poolEnemies.ContainsKey(enemy.GetName()))
+            {
+            _poolEnemies[enemy.GetName()].Add(enemy);
+            _activeEnemies.Remove(enemy);
+            enemy.Unsuscribe(HandleEnemyDeath);
         }
     }
 }

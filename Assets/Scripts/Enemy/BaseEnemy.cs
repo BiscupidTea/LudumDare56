@@ -2,15 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemy : MonoBehaviour, IHealth
+public class BaseEnemy : MonoBehaviour, IHealth<BaseEnemy>
 {
     [Header("Enemy Data")] [SerializeField]
     public BaseEnemySO enemySo;
 
+    private SpriteRenderer _view;
+    private float _currentLifePoints;
     private List<Transform> pathPoints;
     private int currentPoint = 0;
 
     private float distanceToReachPoint = 0.4f;
+
+    public event Action<float> OnEnemyChangeLife;
+    public event Action<BaseEnemy> OnEnemyDeath;
 
     private void Update()
     {
@@ -27,6 +32,26 @@ public class BaseEnemy : MonoBehaviour, IHealth
         }
     }
 
+    public void SetSO(BaseEnemySO so)
+    {
+        enemySo = so;
+        _currentLifePoints = so.maxLife;
+    }
+
+    public string GetName()
+    {
+        return enemySo.enemyName;
+    }
+
+    public void Revive()
+    {
+        transform.position = pathPoints[0].position;
+        currentPoint = 0;
+        _currentLifePoints = enemySo.maxLife;
+        OnEnemyChangeLife?.Invoke(_currentLifePoints / enemySo.maxLife);
+        gameObject.SetActive(true);
+    }
+
     public void SetNewPath(List<Transform> newPath)
     {
         pathPoints = newPath;
@@ -34,12 +59,17 @@ public class BaseEnemy : MonoBehaviour, IHealth
 
     public void TakeDamage(int damage)
     {
-        throw new NotImplementedException();
+        _currentLifePoints -= damage;
+        if (_currentLifePoints <= 0)
+        {
+            Dead();
+        }
+        OnEnemyChangeLife?.Invoke(_currentLifePoints / enemySo.maxLife);
     }
 
     public void Dead()
     {
-        throw new NotImplementedException();
+        OnEnemyDeath?.Invoke(this);
     }
 
     public void SuscribeActionDeath(Action action)
@@ -60,11 +90,21 @@ public class BaseEnemy : MonoBehaviour, IHealth
 
     public void SuscribeLifeChange(Action<float> action)
     {
-        throw new NotImplementedException();
+        OnEnemyChangeLife += action;
     }
 
     public void UnsuscribeLifeChange(Action<float> action)
     {
-        throw new NotImplementedException();
+        OnEnemyChangeLife -= action;
+    }
+
+    public void SuscribeAction(Action<BaseEnemy> action)
+    {
+        OnEnemyDeath += action;
+    }
+
+    public void Unsuscribe(Action<BaseEnemy> action)
+    {
+        OnEnemyDeath -= action;
     }
 }
