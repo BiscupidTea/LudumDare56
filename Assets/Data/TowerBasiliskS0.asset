@@ -18,4 +18,6 @@ MonoBehaviour:
   rotationSpeed: 200
   shootAnimationDuration: 0.5
   bulletSpeed: 3
-  price: 0
+  price: 15
+  upgradePrice: 5
+  upgradePriceAdd: 5
