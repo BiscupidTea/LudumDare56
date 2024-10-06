@@ -28,12 +28,12 @@ public class TowerDefault : BaseTower
         canShoot = false;
         OnShoot?.Invoke();
 
-        yield return new WaitForSeconds(towerSo.shootAnimationDuration);
+        yield return new WaitForSeconds(towerSoP.shootAnimationDuration);
 
         GetBulletFromPool(); 
         turretAudio.PlayShootSound();
         
-        yield return new WaitForSeconds(towerSo.fireRate);
+        yield return new WaitForSeconds(towerSoP.fireRate);
         canShoot = true;
     }
 
@@ -60,7 +60,7 @@ public class TowerDefault : BaseTower
             bulletsPool.Remove(bullet);
         }
 
-        bullet.SetTarget(lastKnownTarget.transform, towerSo.damage, towerSo.bulletSpeed);
+        bullet.SetTarget(lastKnownTarget.transform, towerSoP.damage, towerSoP.bulletSpeed);
         return bullet;
     }
 
