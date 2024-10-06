@@ -61,7 +61,6 @@ public class TowerDefault : BaseTower
             bullet = bulletsPool[0];
 
             bullet.transform.position = aimPoint.position;
-            bullet.RotateTowardsTarget();
             bullet.gameObject.SetActive(true);
 
             activeBullets.Add(bullet);
