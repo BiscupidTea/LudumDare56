@@ -10,5 +10,7 @@ public class BaseTowerSO : ScriptableObject
     public float shootAnimationDuration;
     public float bulletSpeed;
     public float price;
+    public float upgradePrice;
+    public float upgradePriceAdd;
 }
 
