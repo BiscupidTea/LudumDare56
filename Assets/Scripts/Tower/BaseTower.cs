@@ -114,7 +114,7 @@ public class BaseTower : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, towerSo.attackRadius);
+        //Handles.color = Color.cyan;
+        //Handles.DrawWireDisc(transform.position, transform.forward, towerSo.attackRadius);
     }
 }
