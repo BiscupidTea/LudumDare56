@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Transform target;
+    protected Transform target;
     private Rigidbody2D rb;
 
-    private Vector2 direction;
+    protected Vector2 direction;
     private float speed;
-    private int damage;
+    protected int damage;
 
     public event Action<Bullet> OnDeactivated = delegate { };
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -20,11 +20,6 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = direction * speed;
-
-        if (target != null && target.gameObject.activeSelf)
-        {
-            RotateTowardsTarget();
-        }
     }
 
     public void SetTarget(Transform _target, int _damage, float _speed)
@@ -36,9 +31,10 @@ public class Bullet : MonoBehaviour
         speed = _speed;
 
         direction = (target.position - transform.position).normalized;
+        RotateTowardsTarget();
     }
 
-    public void RotateTowardsTarget()
+    private void RotateTowardsTarget()
     {
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg + 90f;
 
@@ -46,7 +42,7 @@ public class Bullet : MonoBehaviour
         transform.rotation = targetRotation;
     }
 
-    private void OnCollisionEnter2D(Collision2D targetCollision)
+    protected virtual void OnCollisionEnter2D(Collision2D targetCollision)
     {
         if (targetCollision.transform == target)
         {
@@ -63,7 +59,7 @@ public class Bullet : MonoBehaviour
         Deactivate();
     }
 
-    private void Deactivate()
+    protected void Deactivate()
     {
         OnDeactivated?.Invoke(this);
         gameObject.SetActive(false);

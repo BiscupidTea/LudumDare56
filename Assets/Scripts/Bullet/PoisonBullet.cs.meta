@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Scripts/Bullet/Bullet.cs.meta
+guid: 7c2a0d1077c6ed5469b5f8fcb867983f
+========
+guid: 6d5cf903fac3a304f990633f88fec916
+>>>>>>>> Stashed changes:Assets/Scripts/Spawner.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -16,7 +16,7 @@ TagManager:
   - Spawner
   - Bullet
   - Road
-  - 
+  - DamageArea
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 2018315991
+    locked: 0
+  - name: Enemy
+    uniqueID: 970892389
     locked: 0
   - name: AttackArea
     uniqueID: 663145081
