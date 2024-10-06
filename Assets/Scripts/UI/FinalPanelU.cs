@@ -6,6 +6,7 @@ using UnityEngine;
 public class FinalPanelU : MonoBehaviour
 {
     [SerializeField] private GameObject _panel;
+    [SerializeField] private GameObject _nextLevelButton;
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private TMP_Text _text;
 
@@ -27,9 +28,16 @@ public class FinalPanelU : MonoBehaviour
     private void HandleEndGame(bool isWin)
     {
         _panel.SetActive(true);
+        Time.timeScale = 0;
         if (isWin)
+        {
             _text.text = "YOU WIN";
+            _nextLevelButton.SetActive(true);
+        }
         else
+        {
             _text.text = "YOU LOST";
+            _nextLevelButton.SetActive(false);
+        }
     }
 }

@@ -9,6 +9,6 @@ public class MusicManager : MonoBehaviour
     private void Start()
     {
         audioManager = FindObjectOfType<AudioManager>();
-        audioManager.PlayMusic(music);
+        audioManager?.PlayMusic(music);
     }
 }

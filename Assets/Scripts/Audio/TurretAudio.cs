@@ -17,6 +17,6 @@ public class TurretAudio : MonoBehaviour
 
     public void PlayShootSound()
     {
-        audioManager.PlaySFX(shootSFX[Random.Range(0, shootSFX.Length)]);
+        audioManager?.PlaySFX(shootSFX[Random.Range(0, shootSFX.Length)]);
     }
 }
