@@ -1,6 +1,9 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
-public class BaseTower : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+public class BaseTower : MonoBehaviour, ISelectable
 {
     [Header("Tower Data")]
     [SerializeField] protected BaseTowerSO towerSoP;
@@ -10,17 +13,29 @@ public class BaseTower : MonoBehaviour
     [SerializeField] protected Transform aimPoint;
 
     [SerializeField] protected Bullet bulletPrefab;
-    
+
     [SerializeField] private LayerMask enemyMask;
 
     [SerializeField] private GameObject attackRangeUI;
+
+    protected float p_currentUpgradePrice;
+    private SpriteRenderer _spriteRenderer;
+    private Color _color;
 
     protected BaseEnemy target;
 
     public BaseTowerSO towerSo { get { return towerSoP; } }
 
-    private void Awake()
+    public float currentUpgradePrice { get { return p_currentUpgradePrice; } }
+
+    public event Action<BaseTower> OnSelectedTower;
+
+
+    protected virtual void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _color = _spriteRenderer.color;
+        p_currentUpgradePrice = towerSoP.upgradePrice;
         if (!rotationPoint)
         {
             Debug.LogError($"{name}: Rotation point is null");
@@ -111,4 +126,20 @@ public class BaseTower : MonoBehaviour
         target.OnEnemyDeath -= HandleTargetDeath;
         target = null;
     }
+
+    public void ChangeColor(bool isSelected)
+    {
+        if (isSelected)
+        {
+            _spriteRenderer.color = Color.red;
+            OnSelectedTower?.Invoke(this);
+        }
+        else
+        {
+            _spriteRenderer.color = _color;
+        }
+        
+    }
+
+    public virtual void Upgrade() { }
 }

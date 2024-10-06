@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, ISelectable
 {
     private bool _isOcupaid;
     private BaseTower _towerSpawned;
@@ -25,14 +25,15 @@ public class Spawner : MonoBehaviour
         return !_isOcupaid;
     }
 
-    public void SpawnTower(BaseTower baseTower)
+    public BaseTower SpawnTower(BaseTower baseTower)
     {
         if (_isOcupaid)
-            return;
+            return null;
 
         _towerSpawned = Instantiate(baseTower,transform.position,Quaternion.identity);
         _isOcupaid = true;
         _spriteRenderer.color = _color;
+        return _towerSpawned;
     }
 
     public void ChangeColor(bool isObserved)

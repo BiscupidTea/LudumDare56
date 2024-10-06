@@ -10,7 +10,7 @@ public class InputReader : MonoBehaviour
 
     [SerializeField] private LayerMask _spawnTowerMask;
     [SerializeField] private int _rangeLayer;
-    private Spawner spawn;
+    private ISelectable spawn;
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class InputReader : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
         if (hit)
         {
-            if (hit.transform.TryGetComponent<Spawner>(out Spawner hitSpawnTower))
+            if (hit.transform.TryGetComponent<ISelectable>(out ISelectable hitSpawnTower))
             {
                 if (spawn == null)
                 {

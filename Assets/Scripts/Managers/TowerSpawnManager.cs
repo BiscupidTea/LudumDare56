@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class TowerSpawnManager : MonoBehaviour
     [SerializeField] private List<Spawner> _spawnerPoints;
 
     private Spawner _currentSelectedSpawner;
+
+    public event Action<BaseTower> OnTowerSpawned;
 
     private void OnEnable()
     {
@@ -47,6 +50,11 @@ public class TowerSpawnManager : MonoBehaviour
             return;
 
         if(_currentSelectedSpawner.IsEmpty() && _economyManager.RemoveGold((int)baseTower.GetPrice()))
-            _currentSelectedSpawner.SpawnTower(baseTower);
+        {
+            BaseTower temp;
+            temp = _currentSelectedSpawner.SpawnTower(baseTower);
+            if(temp)
+                OnTowerSpawned?.Invoke(temp);
+        }
     }
 }

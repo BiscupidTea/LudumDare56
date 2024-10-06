@@ -15,6 +15,14 @@ public class TowerDefault : BaseTower
 
     public Action OnShoot;
 
+    private float _currentFireRate;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _currentFireRate = towerSoP.fireRate;
+    }
+
     protected override void Shoot(Transform _lastKnownTarget)
     {
         if (!canShoot) return;
@@ -33,7 +41,7 @@ public class TowerDefault : BaseTower
         GetBulletFromPool(); 
         turretAudio.PlayShootSound();
         
-        yield return new WaitForSeconds(towerSoP.fireRate);
+        yield return new WaitForSeconds(_currentFireRate);
         canShoot = true;
     }
 
@@ -68,5 +76,18 @@ public class TowerDefault : BaseTower
     {
         activeBullets.Remove(bullet);
         bulletsPool.Add(bullet);
+    }
+
+    public override void Upgrade()
+    {
+        p_currentUpgradePrice += towerSoP.upgradePriceAdd;
+        if(_currentFireRate <= 0.5)
+        {
+            _currentFireRate = 0.5f;
+        }
+        else
+        {
+            _currentFireRate -= 0.5f;
+        }
     }
 }

@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 3389398249108857387}
   - component: {fileID: 5024956164773235870}
   - component: {fileID: 6219658501625114825}
+  - component: {fileID: -14939547928042426}
   m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
@@ -348,11 +349,12 @@ MonoBehaviour:
   towerSoP: {fileID: 11400000, guid: d329ffb181d6bc243953bc5ce5e16555, type: 2}
   rotationPoint: {fileID: 2789932025889149739}
   aimPoint: {fileID: 7474777995179870977}
+  _upgradeButton: {fileID: 0}
   bulletPrefab: {fileID: 1463925312192126859, guid: 5c6b3271f229acb4d83e9edc4c8ba887, type: 3}
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  attackRangeUI: {fileID: 8018319751020487393}
+  attackRangeUI: {fileID: 3488269002305033176}
   turretAudio: {fileID: 3389398249108857387}
 --- !u!114 &3389398249108857387
 MonoBehaviour:
@@ -404,6 +406,41 @@ MonoBehaviour:
   _animator: {fileID: 5024956164773235870}
   _default: {fileID: 4861142895689510523}
   _attackParameter: attack
+--- !u!58 &-14939547928042426
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846342086443264967}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.6227431
 --- !u!1 &8018319751020487393
 GameObject:
   m_ObjectHideFlags: 0
