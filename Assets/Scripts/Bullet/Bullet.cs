@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -57,8 +56,11 @@ public class Bullet : MonoBehaviour
                 Deactivate();
             }
         }
+    }
 
-        //TODO: Bullet has to disappear when colliding with walls
+    private void OnBecameInvisible()
+    {
+        Deactivate();
     }
 
     private void Deactivate()

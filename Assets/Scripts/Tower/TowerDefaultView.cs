@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerDefaultView : MonoBehaviour
@@ -7,8 +5,7 @@ public class TowerDefaultView : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private TowerDefault _default;
 
-    [SerializeField] private string _attackParameter = "isAttacking";
-    [SerializeField] private float _timeAnimation = 0.5f;
+    [SerializeField] private string _attackParameter = "attack";
 
     private void OnEnable()
     {
@@ -22,13 +19,7 @@ public class TowerDefaultView : MonoBehaviour
 
     private void HandleAttack()
     {
-        _animator.SetBool(_attackParameter,true);
+        _animator.SetTrigger(_attackParameter);
 
-    }
-
-    private IEnumerator WaitingForFalseAttack()
-    {
-        yield return new WaitForSeconds(_timeAnimation);
-        _animator.SetBool(_attackParameter, false);
     }
 }

@@ -11,12 +11,15 @@ public class TowerDefault : BaseTower
     [SerializeField] private TurretAudio turretAudio;
     
     private bool canShoot = true;
+    private Transform lastKnownTarget;
 
     public Action OnShoot;
 
-    protected override void Shoot()
+    protected override void Shoot(Transform _lastKnownTarget)
     {
         if (!canShoot) return;
+
+        lastKnownTarget = _lastKnownTarget;
         StartCoroutine(ShootSequence());
     }
 
@@ -24,8 +27,10 @@ public class TowerDefault : BaseTower
     {
         canShoot = false;
         OnShoot?.Invoke();
-        GetBulletFromPool();
-        
+
+        yield return new WaitForSeconds(towerSo.shootAnimationDuration);
+
+        GetBulletFromPool(); 
         turretAudio.PlayShootSound();
         
         yield return new WaitForSeconds(towerSo.fireRate);
@@ -55,7 +60,7 @@ public class TowerDefault : BaseTower
             bulletsPool.Remove(bullet);
         }
 
-        bullet.SetTarget(target.transform, towerSo.damage, 5f);
+        bullet.SetTarget(lastKnownTarget.transform, towerSo.damage, towerSo.bulletSpeed);
         return bullet;
     }
 

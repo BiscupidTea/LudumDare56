@@ -6,24 +6,14 @@ public class BaseTower : MonoBehaviour
     [SerializeField] public BaseTowerSO towerSo;
 
     [Header("References")]
-    [SerializeField] protected Transform rotationPoint;
     [SerializeField] protected Transform aimPoint;
-
     [SerializeField] protected Bullet bulletPrefab;
-
     [SerializeField] private LayerMask enemyMask;
 
     protected BaseEnemy target;
 
     private void Awake()
     {
-        if (!rotationPoint)
-        {
-            Debug.LogError($"{name}: Rotation point is null");
-            enabled = false;
-            return;
-        }
-
         if (!aimPoint)
         {
             Debug.LogError($"{name}: Aim point is null");
@@ -55,7 +45,7 @@ public class BaseTower : MonoBehaviour
             return;
         }
 
-        Shoot();
+        Shoot(target.transform);
     }
 
     private void FindTarget()
@@ -87,7 +77,7 @@ public class BaseTower : MonoBehaviour
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg + 90f;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        rotationPoint.rotation = Quaternion.RotateTowards(rotationPoint.rotation, targetRotation, towerSo.rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, towerSo.rotationSpeed * Time.deltaTime);
     }
 
     private bool CheckIfTargetInRange()
@@ -95,7 +85,7 @@ public class BaseTower : MonoBehaviour
         return Vector2.Distance(target.transform.position, transform.position) <= towerSo.attackRadius;
     }
 
-    protected virtual void Shoot() { }
+    protected virtual void Shoot(Transform _lastKnownTarget) { }
 
     public float GetPrice()
     {

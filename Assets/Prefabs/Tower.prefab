@@ -346,7 +346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerSo: {fileID: 11400000, guid: d329ffb181d6bc243953bc5ce5e16555, type: 2}
-  rotationPoint: {fileID: 2789932025889149739}
   aimPoint: {fileID: 7474777995179870977}
   bulletPrefab: {fileID: 1463925312192126859, guid: 5c6b3271f229acb4d83e9edc4c8ba887, type: 3}
   enemyMask:
@@ -402,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5024956164773235870}
   _default: {fileID: 4861142895689510523}
-  _attackParameter: isAttacking
+  _attackParameter: attack
   _timeAnimation: 0.5
 --- !u!1 &8018319751020487393
 GameObject:

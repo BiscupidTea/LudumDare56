@@ -50,3 +50,6 @@ TagManager:
   - name: Tower
     uniqueID: 2223998315
     locked: 0
+  - name: UI
+    uniqueID: 2733392671
+    locked: 0

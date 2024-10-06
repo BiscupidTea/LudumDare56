@@ -16,4 +16,6 @@ MonoBehaviour:
   fireRate: 1
   attackRadius: 5
   rotationSpeed: 200
+  shootAnimationDuration: 0.5
+  bulletSpeed: 5
   price: 5
