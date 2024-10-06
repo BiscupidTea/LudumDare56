@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   fireRate: 10
-  attackRadius: 10
+  attackRadius: 3
   rotationSpeed: 200
   shootAnimationDuration: 0.5
   bulletSpeed: 5
-  price: 15
+  price: 0
   upgradePrice: 5
   upgradePriceAdd: 5
