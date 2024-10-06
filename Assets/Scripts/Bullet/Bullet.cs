@@ -44,13 +44,10 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D targetCollision)
     {
-        if (targetCollision.transform == target)
+        if (targetCollision.transform.TryGetComponent<BaseEnemy>(out var hitTarget))
         {
-            if (targetCollision.transform.TryGetComponent<IHealth>(out var hitTarget))
-            {
-                hitTarget.TakeDamage(damage);
-                Deactivate();
-            }
+            hitTarget.TakeDamage(damage);
+            Deactivate();
         }
     }
 

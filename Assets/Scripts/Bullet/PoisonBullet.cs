@@ -8,18 +8,15 @@ public class PoisonBullet : Bullet
 
     protected override void OnCollisionEnter2D(Collision2D targetCollision)
     {
-        if (targetCollision.transform == target)
+        if (targetCollision.transform.TryGetComponent<BaseEnemy>(out var hitTarget))
         {
-            if (targetCollision.transform.TryGetComponent<IHealth>(out var hitTarget))
-            {
-                hitTarget.TakeDamage(damage);
+            hitTarget.TakeDamage(damage);
 
-                Instantiate(damageAreaPrefab, transform.position, Quaternion.identity)
-                    .GetComponent<DamageArea>()
-                    .Initialize(effectRadius, damage);
+            Instantiate(damageAreaPrefab, transform.position, Quaternion.identity)
+                .GetComponent<DamageArea>()
+                .Initialize(effectRadius, damage);
 
-                Deactivate();
-            }
+            Deactivate();
         }
     }
 }
