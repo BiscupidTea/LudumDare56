@@ -38,12 +38,15 @@ public class InputReader : MonoBehaviour
                 {
                     spawn = hitSpawnTower;
                     spawn.ChangeColor(true);
+                    spawn.SuscribeChangeColor(HandleDestroySpawn);
                 }
                 else
                 {
                     spawn.ChangeColor(false);
+                    spawn.UnsuscribeChangeColor(HandleDestroySpawn);
                     spawn = hitSpawnTower;
                     spawn.ChangeColor(true);
+                    spawn.SuscribeChangeColor(HandleDestroySpawn);
                 }
             }
         }
@@ -52,7 +55,14 @@ public class InputReader : MonoBehaviour
             if (spawn != null)
             {
                 spawn.ChangeColor(false);
+                spawn.UnsuscribeChangeColor(HandleDestroySpawn);
             }
         }
+    }
+
+    private void HandleDestroySpawn()
+    {
+        spawn.UnsuscribeChangeColor(HandleDestroySpawn);
+        spawn = null;
     }
 }

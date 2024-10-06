@@ -349,7 +349,6 @@ MonoBehaviour:
   towerSoP: {fileID: 11400000, guid: d329ffb181d6bc243953bc5ce5e16555, type: 2}
   rotationPoint: {fileID: 2789932025889149739}
   aimPoint: {fileID: 7474777995179870977}
-  _upgradeButton: {fileID: 0}
   bulletPrefab: {fileID: 1463925312192126859, guid: 5c6b3271f229acb4d83e9edc4c8ba887, type: 3}
   enemyMask:
     serializedVersion: 2
@@ -440,7 +439,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.6227431
+  m_Radius: 1.6
 --- !u!1 &8018319751020487393
 GameObject:
   m_ObjectHideFlags: 0

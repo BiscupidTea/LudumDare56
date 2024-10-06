@@ -11,12 +11,14 @@ public class Spawner : MonoBehaviour, ISelectable
     private BaseTower _towerSpawned;
     private SpriteRenderer _spriteRenderer;
     private Color _color;
+    private BoxCollider2D _collider;
 
     public event Action<Spawner> SpawnedClicked;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<BoxCollider2D>();
         _color = _spriteRenderer.color;
     }
 
@@ -33,6 +35,7 @@ public class Spawner : MonoBehaviour, ISelectable
         _towerSpawned = Instantiate(baseTower,transform.position,Quaternion.identity);
         _isOcupaid = true;
         _spriteRenderer.color = _color;
+        _collider.enabled = false;
         return _towerSpawned;
     }
 
@@ -50,5 +53,19 @@ public class Spawner : MonoBehaviour, ISelectable
         {
             _spriteRenderer.color = _color;
         }
+    }
+
+    public void DeleteTower()
+    {
+        _isOcupaid = false;
+        _collider.enabled = true;
+    }
+
+    public void SuscribeChangeColor(Action action)
+    {
+    }
+
+    public void UnsuscribeChangeColor(Action action)
+    {
     }
 }

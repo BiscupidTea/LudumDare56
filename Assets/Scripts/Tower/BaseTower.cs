@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -29,7 +30,8 @@ public class BaseTower : MonoBehaviour, ISelectable
     public float currentUpgradePrice { get { return p_currentUpgradePrice; } }
 
     public event Action<BaseTower> OnSelectedTower;
-
+    public event Action OnDie = delegate{ };
+    public event Action<BaseTower> OnDeleteTower;
 
     protected virtual void Awake()
     {
@@ -136,10 +138,40 @@ public class BaseTower : MonoBehaviour, ISelectable
         }
         else
         {
+            OnSelectedTower?.Invoke(null);
             _spriteRenderer.color = _color;
         }
-        
     }
 
     public virtual void Upgrade() { }
+
+    public virtual void DeleteTower()
+    {
+        OnDie.Invoke();
+        OnDeleteTower?.Invoke(this);
+        OnSelectedTower?.Invoke(null);
+        StartCoroutine(WaitingForDie());
+    }
+
+    protected IEnumerator WaitingForDie()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+
+    public void SuscribeChangeColor(Action  action)
+    {
+        OnDie += action;
+    }
+
+    public void UnsuscribeChangeColor(Action action)
+    {
+        StartCoroutine(WaitingUnsuscribe(action));
+    }
+
+    private IEnumerator WaitingUnsuscribe(Action action)
+    {
+        yield return new WaitForSeconds(0.5f);
+        OnDie -= action;
+    }
 }

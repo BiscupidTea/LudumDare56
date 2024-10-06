@@ -11,6 +11,8 @@ public class TowerSpawnManager : MonoBehaviour
     [SerializeField] private List<TowerButton> _towerButtons;
     [SerializeField] private List<Spawner> _spawnerPoints;
 
+    private Dictionary<BaseTower, Spawner> _towerAndSpawnerDic = new();
+
     private Spawner _currentSelectedSpawner;
 
     public event Action<BaseTower> OnTowerSpawned;
@@ -37,6 +39,10 @@ public class TowerSpawnManager : MonoBehaviour
         {
             _spawnerPoints[i].SpawnedClicked -= HandleSpawnPoint;
         }
+        foreach (var item in _towerAndSpawnerDic.Keys)
+        {
+            item.OnDeleteTower -= DeleteTower;
+        }
     }
 
     private void HandleSpawnPoint(Spawner spawnPoint)
@@ -53,8 +59,22 @@ public class TowerSpawnManager : MonoBehaviour
         {
             BaseTower temp;
             temp = _currentSelectedSpawner.SpawnTower(baseTower);
-            if(temp)
+            if (temp)
+            {
+                _towerAndSpawnerDic.Add(temp, _currentSelectedSpawner);
                 OnTowerSpawned?.Invoke(temp);
+                temp.OnDeleteTower += DeleteTower;
+            }
+        }
+    }
+
+    public void DeleteTower(BaseTower tower)
+    {
+        tower.OnDeleteTower -= DeleteTower;
+        if (_towerAndSpawnerDic.ContainsKey(tower))
+        {
+            _towerAndSpawnerDic[tower].DeleteTower();
+            _towerAndSpawnerDic.Remove(tower);
         }
     }
 }

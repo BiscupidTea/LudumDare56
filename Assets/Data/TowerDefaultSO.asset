@@ -19,3 +19,5 @@ MonoBehaviour:
   shootAnimationDuration: 0.5
   bulletSpeed: 5
   price: 5
+  upgradePrice: 1
+  upgradePriceAdd: 2

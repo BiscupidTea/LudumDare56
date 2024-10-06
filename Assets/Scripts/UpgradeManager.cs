@@ -20,6 +20,7 @@ public class UpgradeManager : MonoBehaviour
     {
         _spawnManager.OnTowerSpawned += HandleSpawnTower;
         _upgradeButton.OnTryToUpgrade += TryToUpgradeTower;
+        _deleteButton.onClick.AddListener(HandleDeleteTower);
     }
 
     private void OnDisable()
@@ -30,11 +31,12 @@ public class UpgradeManager : MonoBehaviour
         {
             _towersList[i].OnSelectedTower -= HandleSelectedTower;
         }
+        _deleteButton.onClick.RemoveListener(HandleDeleteTower);
     }
 
     private void Awake()
     {
-        _upgradeButton.gameObject.SetActive(false);
+        _upgradeAndDeletePanel.gameObject.SetActive(false);
     }
 
     private void HandleSpawnTower(BaseTower tower)
@@ -45,9 +47,15 @@ public class UpgradeManager : MonoBehaviour
 
     private void HandleSelectedTower(BaseTower tower)
     {
+        if (tower == null)
+        {
+            StartCoroutine(WaitingForNullSend());
+            return;
+        }
+        StopAllCoroutines();
         _currentSelectedTower = tower;
         _upgradeButton.HandleTower(tower);
-        _upgradeButton.gameObject.SetActive(true);
+        _upgradeAndDeletePanel.gameObject.SetActive(true);
     }
 
     private void TryToUpgradeTower(BaseTower tower)
@@ -56,5 +64,19 @@ public class UpgradeManager : MonoBehaviour
         {
             tower.Upgrade();
         }
+    }
+
+    private void HandleDeleteTower()
+    {
+        if(_currentSelectedTower)
+            _currentSelectedTower.DeleteTower();
+        _currentSelectedTower = null;
+    }
+
+
+    private IEnumerator WaitingForNullSend()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _upgradeAndDeletePanel.gameObject.SetActive(false);
     }
 }
