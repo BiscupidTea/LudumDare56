@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2963547
-  m_fontColor: {r: 0.35686275, g: 0.21960784, b: 0.1764706, a: 0}
+    rgba: 4281153627
+  m_fontColor: {r: 0.35686275, g: 0.21960784, b: 0.1764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -415,9 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89f961cda796c444aefe990140c420a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverSprite: {fileID: 2419705187897616441}
-  hoverText: {fileID: 3803199336186955383}
-  animationSpeed: 10
+  hoverSprite: {fileID: 5992446502927374281}
 --- !u!1 &5992446502927374281
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5081410746038512396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -477,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
