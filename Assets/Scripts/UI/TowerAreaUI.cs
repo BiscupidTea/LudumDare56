@@ -17,9 +17,13 @@ public class TowerAreaUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void Awake()
     {
+        BaseTower baseTower = GetComponentInParent<BaseTower>();
+
         startColor = attackRadius.color;
         endColor = new Color(startColor.r, startColor.g, startColor.b, minAlpha);
         attackRadius.color = endColor;
+
+        attackRadius.GetComponent<RectTransform>().sizeDelta = new Vector2(baseTower.towerSo.attackRadius * 2, baseTower.towerSo.attackRadius * 2);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

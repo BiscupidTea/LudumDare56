@@ -1,11 +1,9 @@
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class BaseTower : MonoBehaviour
 {
     [Header("Tower Data")]
-    [SerializeField] protected BaseTowerSO towerSo;
+    [SerializeField] public BaseTowerSO towerSo;
 
     [Header("References")]
     [SerializeField] protected Transform rotationPoint;
@@ -14,8 +12,6 @@ public class BaseTower : MonoBehaviour
     [SerializeField] protected Bullet bulletPrefab;
 
     [SerializeField] private LayerMask enemyMask;
-
-    [SerializeField] private GameObject attackRangeUI;
 
     protected BaseEnemy target;
 
@@ -110,11 +106,5 @@ public class BaseTower : MonoBehaviour
     {
         target.OnEnemyDeath -= HandleTargetDeath;
         target = null;
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Handles.color = Color.cyan;
-        //Handles.DrawWireDisc(transform.position, transform.forward, towerSo.attackRadius);
     }
 }

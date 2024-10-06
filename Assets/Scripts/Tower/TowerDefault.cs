@@ -8,7 +8,7 @@ public class TowerDefault : BaseTower
     private List<Bullet> activeBullets = new List<Bullet>();
     private List<Bullet> bulletsPool = new List<Bullet>();
 
-    [SerializeField]private TurretAudio audio;
+    [SerializeField] private TurretAudio turretAudio;
     
     private bool canShoot = true;
 
@@ -26,7 +26,7 @@ public class TowerDefault : BaseTower
         OnShoot?.Invoke();
         GetBulletFromPool();
         
-        audio.PlayShootSound();
+        turretAudio.PlayShootSound();
         
         yield return new WaitForSeconds(towerSo.fireRate);
         canShoot = true;
