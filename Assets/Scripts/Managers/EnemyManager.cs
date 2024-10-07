@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private WaveController waveController;
     [SerializeField] private int enemyCount;
     [SerializeField] private float timeBetweenEnemies = 0.5f;
-    [SerializeField] private BaseEnemy enemyPrefab;
+    [SerializeField] private List<BaseEnemy> enemyPrefab;
     [SerializeField] private OlimpicTemple _temple;
 
     [SerializeField] private Transform SpawnPosition;
@@ -61,7 +61,7 @@ public class EnemyManager : MonoBehaviour
 
     private BaseEnemy NewEnemy(BaseEnemySO so)
     {
-        BaseEnemy baseEnemyComponent = Instantiate(enemyPrefab, SpawnPosition.position, Quaternion.identity, transform);
+        BaseEnemy baseEnemyComponent = Instantiate(enemyPrefab[so.index], SpawnPosition.position, Quaternion.identity, transform);
         baseEnemyComponent.SetSO(so);
         baseEnemyComponent.SetNewPath(path);
         baseEnemyComponent.SetTemple(_temple);

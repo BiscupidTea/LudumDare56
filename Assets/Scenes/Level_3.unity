@@ -156,7 +156,9 @@ MonoBehaviour:
   waveController: {fileID: 1642184852}
   enemyCount: 0
   timeBetweenEnemies: 0.5
-  enemyPrefab: {fileID: 1362362359239359870, guid: 5cbae05252a7c0e4193056172e175fd8, type: 3}
+  enemyPrefab:
+  - {fileID: 1362362359239359870, guid: 5cbae05252a7c0e4193056172e175fd8, type: 3}
+  - {fileID: 493687553340225675, guid: 7710c55298456db46ab41cebd6a8bbc4, type: 3}
   _temple: {fileID: 1230639070}
   SpawnPosition: {fileID: 1035277}
   path:

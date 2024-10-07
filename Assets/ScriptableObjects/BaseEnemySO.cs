@@ -8,4 +8,5 @@ public class BaseEnemySO : ScriptableObject
     public float speed = 1f;
     public float maxLife = 1f;
     public float damage = 1f;
+    public int index = 0;
 }
