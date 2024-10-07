@@ -17,7 +17,7 @@ MonoBehaviour:
   attackRadius: 8
   rotationSpeed: 200
   shootAnimationDuration: 0.5
-  bulletSpeed: 5
+  bulletSpeed: 9
   price: 5
   upgradePrice: 1
   upgradePriceAdd: 2

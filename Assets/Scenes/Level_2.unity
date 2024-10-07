@@ -6383,7 +6383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3803199336186955383, guid: 1c81f0ecba08b4a4582f9c7679445d3c, type: 3}
       propertyPath: m_text
-      value: MENU
+      value: Next Level
       objectReference: {fileID: 0}
     - target: {fileID: 5922383069248872851, guid: 1c81f0ecba08b4a4582f9c7679445d3c, type: 3}
       propertyPath: m_Name
