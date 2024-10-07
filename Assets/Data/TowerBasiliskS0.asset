@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TowerBasiliskS0
   m_EditorClassIdentifier: 
   damage: 1
-  fireRate: 10
+  fireRate: 14
   attackRadius: 3
   rotationSpeed: 200
   shootAnimationDuration: 0.5

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poisonDuration: 5
-  damageCooldown: 1
+  damageCooldown: 2
   animationSpeed: 1
   enemyLayer:
     serializedVersion: 2

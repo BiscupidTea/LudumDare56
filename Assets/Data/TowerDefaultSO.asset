@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   fireRate: 1
-  attackRadius: 5
+  attackRadius: 8
   rotationSpeed: 200
   shootAnimationDuration: 0.5
   bulletSpeed: 5
